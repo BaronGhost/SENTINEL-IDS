@@ -13,7 +13,7 @@ st.markdown("""
 <style>
         /* Import Tech Font */
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap');
-    
+
     /* Apply font to whole app */
     html, body, [class*="css"] {
         font-family: 'Inter', sans-serif;
@@ -21,8 +21,8 @@ st.markdown("""
 
     /* Tech Grid Background */
     [data-testid="stAppViewContainer"] {
-        background-color: #050B14;
-        background-image: 
+        background-color: #05294e;
+        background-image:
             linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
             linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
         background-size: 40px 40px;
@@ -37,7 +37,7 @@ st.markdown("""
         margin-bottom: 0px;
     }
     .hero-title span {
-        color: #4F8EF7; /* The light blue from your reference */
+        color: #56aeff;
     }
     .hero-subtitle {
         font-size: 1.1rem;
@@ -92,7 +92,7 @@ st.sidebar.markdown("---")
 st.sidebar.markdown("### ⚙️ Model Configuration")
 
 # The Dropdown
-model_choice = st.sidebar.selectbox(
+model_choice = st.sidebar.radio(
     "Select Dataset Profile:",
     ("CIC-UNSW-NB15", "CIC-IDS2017")
 )
@@ -141,10 +141,10 @@ col1, col2 = st.columns([1.5, 1])
 
 with col1:
     st.markdown("""
-        <p style="color: #4F8EF7; font-weight: 600; letter-spacing: 2px; font-size: 0.9rem; margin-bottom: 10px;">
+        <p style="color: #FFFFFF; font-weight: 600; letter-spacing: 2px; font-size: 0.9rem; margin-bottom: 10px;">
             NEXT-GEN CYBER DEFENSE
         </p>
-        <h1 class="hero-title">Sentinel IDS.<br><span>Hierarchical Detection.</span></h1>
+        <h1 style="margin: 0; font-family: verdana; font-weight: 700; font-size: clamp(42px, 5vw, 56px); line-height: 1.05; letter-spacing: -0.02em">Sentinel IDS. <br> <span style="color: #56aeff">Hierarchical</span> Detection.</h1>
         <p class="hero-subtitle">
             A two-stage machine learning pipeline that filters benign traffic with surgical precision, 
             and identifies malicious attack vectors in real-time using CICFlowMeter data.

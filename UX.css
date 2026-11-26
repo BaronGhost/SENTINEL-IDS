@@ -1,0 +1,72 @@
+/* Import Tech Font */
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap');
+
+    /* Apply font to whole app */
+    html, body, [class*="css"] {
+        font-family: 'Inter', sans-serif;
+    }
+
+    /* Tech Grid Background */
+    [data-testid="stAppViewContainer"] {
+        background-color: #05294e;
+        background-image:
+            linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+        background-size: 40px 40px;
+    }
+
+    /* Hero Text Styling */
+    .hero-title {
+        font-size: 4rem;
+        font-weight: 800;
+        color: #FFFFFF;
+        line-height: 1.1;
+        margin-bottom: 0px;
+    }
+    .hero-title span {
+        color: #56aeff;
+    }
+    .hero-subtitle {
+        font-size: 1.1rem;
+        color: #A0ABC0;
+        margin-top: 15px;
+        margin-bottom: 30px;
+        line-height: 1.6;
+    }
+
+    /* The Tech Card */
+    .tech-card {
+        background-color: rgba(13, 22, 41, 0.7);
+        border: 1px solid rgba(79, 142, 247, 0.3);
+        border-radius: 16px;
+        padding: 25px;
+        backdrop-filter: blur(10px);
+        box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        height: 100%;
+    }
+    .tech-card h4 {
+        color: #FFFFFF;
+        margin-top: 0;
+        font-weight: 600;
+        margin-bottom: 5px;
+    }
+    .tech-card .status-badge {
+        background-color: rgba(0, 240, 255, 0.1);
+        color: #00F0FF;
+        border: 1px solid #00F0FF;
+        padding: 4px 10px;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        display: inline-block;
+        margin-bottom: 20px;
+    }
+    .tech-card p {
+        color: #A0ABC0;
+        font-size: 0.95rem;
+        margin-bottom: 10px;
+    }
+    .tech-card .highlight {
+        color: #FFA500; /* Amber highlight like the reference */
+        font-weight: bold;
+    }
