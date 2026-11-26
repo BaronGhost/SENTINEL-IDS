@@ -13,7 +13,8 @@ st.markdown("""
 <style>
         /* Import Tech Font */
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap');
-
+    @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap')
+    
     /* Apply font to whole app */
     html, body, [class*="css"] {
         font-family: 'Inter', sans-serif;
@@ -22,10 +23,16 @@ st.markdown("""
     /* Tech Grid Background */
     [data-testid="stAppViewContainer"] {
         background-color: #050533;
-        background-image:
+        background-image: 
             linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
             linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
         background-size: 40px 40px;
+    }
+
+    /* Sidebar styling */
+    [data-testid="stSidebar"] {
+        background-color: #060D1F;
+        border-right: 1px solid #1C2541;
     }
 
     /* Hero Text Styling */
@@ -37,7 +44,7 @@ st.markdown("""
         margin-bottom: 0px;
     }
     .hero-title span {
-        color: #56aeff;
+        color: #4F8EF7;
     }
     .hero-subtitle {
         font-size: 1.1rem;
@@ -80,8 +87,54 @@ st.markdown("""
         margin-bottom: 10px;
     }
     .tech-card .highlight {
-        color: #FFA500; /* Amber highlight like the reference */
+        color: #FFA500;
         font-weight: bold;
+    }
+
+    /* Metric cards */
+    [data-testid="stMetricValue"] {
+        color: #00F0FF;
+    }
+    [data-testid="metric-container"] {
+        background-color: #1C2541;
+        border: 1px solid #3A506B;
+        border-radius: 10px;
+        padding: 15px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+    }
+
+    /* Insight Box */
+    .insight-box {
+        background-color: #1C2541;
+        padding: 20px;
+        border-radius: 10px;
+        border-left: 5px solid #00F0FF;
+        height: 100%;
+    }
+    
+    /* Primary Buttons (Scan & Download) */
+    .stButton > button[kind="primary"], .stDownloadButton > button[kind="primary"] {
+        color: #0A1128 !important; 
+        background-color: #00F0FF !important; 
+        font-weight: 800;
+        border: none;
+        transition: all 0.3s ease;
+    }
+    .stButton > button[kind="primary"]:hover, .stDownloadButton > button[kind="primary"]:hover {
+        background-color: #00C0CC !important;
+        box-shadow: 0 0 15px #00F0FF; 
+    }
+    
+    /* Secondary Button (Scan Another) */
+    .stButton > button[kind="secondary"] {
+        color: #00F0FF !important;
+        border: 2px solid #00F0FF !important;
+        background-color: transparent !important;
+        font-weight: bold;
+    }
+    .stButton > button[kind="secondary"]:hover {
+        background-color: #1C2541 !important;
+        box-shadow: 0 0 10px #00F0FF;
     }
 </style>
 """, unsafe_allow_html=True)
