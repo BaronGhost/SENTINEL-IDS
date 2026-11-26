@@ -9,65 +9,79 @@ import time
 # --- PAGE CONFIG ---
 st.set_page_config(page_title="Sentinel AI | IDS", page_icon="🛡️", layout="wide")
 
-# --- CUSTOM CSS FOR AI VIBE ---
 st.markdown("""
 <style>
-    /* Glowing title */
-    .title-text {
-        color: #00F0FF;
-        text-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
+        /* Import Tech Font */
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap');
+    
+    /* Apply font to whole app */
+    html, body, [class*="css"] {
+        font-family: 'Inter', sans-serif;
+    }
+
+    /* Tech Grid Background */
+    [data-testid="stAppViewContainer"] {
+        background-color: #050B14;
+        background-image: 
+            linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+        background-size: 40px 40px;
+    }
+
+    /* Hero Text Styling */
+    .hero-title {
+        font-size: 4rem;
         font-weight: 800;
-        letter-spacing: 2px;
+        color: #FFFFFF;
+        line-height: 1.1;
+        margin-bottom: 0px;
     }
-    /* Metric cards */
-    [data-testid="stMetricValue"] {
-        color: #00F0FF;
+    .hero-title span {
+        color: #4F8EF7; /* The light blue from your reference */
     }
-    [data-testid="metric-container"] {
-        background-color: #1C2541;
-        border: 1px solid #3A506B;
-        border-radius: 10px;
-        padding: 15px;
-        box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+    .hero-subtitle {
+        font-size: 1.1rem;
+        color: #A0ABC0;
+        margin-top: 15px;
+        margin-bottom: 30px;
+        line-height: 1.6;
     }
-    /* Sidebar styling */
-    [data-testid="stSidebar"] {
-        background-color: #060D1F;
-        border-right: 1px solid #1C2541;
-    }
-    /* Insight Box */
-    .insight-box {
-        background-color: #1C2541;
-        padding: 20px;
-        border-radius: 10px;
-        border-left: 5px solid #00F0FF;
+
+    /* The Tech Card */
+    .tech-card {
+        background-color: rgba(13, 22, 41, 0.7);
+        border: 1px solid rgba(79, 142, 247, 0.3);
+        border-radius: 16px;
+        padding: 25px;
+        backdrop-filter: blur(10px);
+        box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
         height: 100%;
     }
-
-    /* --- BUTTON STYLING --- */
-    /* Primary Buttons (Scan & Download) */
-    .stButton > button[kind="primary"], .stDownloadButton > button[kind="primary"] {
-        color: #0A1128 !important; /* Dark blue text for contrast */
-        background-color: #00F0FF !important; /* Cyan background */
-        font-weight: 800;
-        border: none;
-        transition: all 0.3s ease;
+    .tech-card h4 {
+        color: #FFFFFF;
+        margin-top: 0;
+        font-weight: 600;
+        margin-bottom: 5px;
     }
-    .stButton > button[kind="primary"]:hover, .stDownloadButton > button[kind="primary"]:hover {
-        background-color: #00C0CC !important;
-        box-shadow: 0 0 15px #00F0FF; /* Glowing effect on hover */
+    .tech-card .status-badge {
+        background-color: rgba(0, 240, 255, 0.1);
+        color: #00F0FF;
+        border: 1px solid #00F0FF;
+        padding: 4px 10px;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        display: inline-block;
+        margin-bottom: 20px;
     }
-
-    /* Secondary Button (Scan Another) */
-    .stButton > button[kind="secondary"] {
-        color: #00F0FF !important;
-        border: 2px solid #00F0FF !important;
-        background-color: transparent !important;
+    .tech-card p {
+        color: #A0ABC0;
+        font-size: 0.95rem;
+        margin-bottom: 10px;
+    }
+    .tech-card .highlight {
+        color: #FFA500; /* Amber highlight like the reference */
         font-weight: bold;
-    }
-    .stButton > button[kind="secondary"]:hover {
-        background-color: #1C2541 !important;
-        box-shadow: 0 0 10px #00F0FF;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -75,9 +89,40 @@ st.markdown("""
 # --- SIDEBAR ---
 st.sidebar.title("🛡️ SENTINEL IDS")
 st.sidebar.markdown("---")
-st.sidebar.markdown("**Model Selection**")
-model_choice = st.sidebar.radio("Select Dataset:", ("CIC-UNSW-NB15", "CIC-IDS2017"))
+st.sidebar.markdown("### ⚙️ Model Configuration")
+
+# The Dropdown
+model_choice = st.sidebar.selectbox(
+    "Select Dataset Profile:",
+    ("CIC-UNSW-NB15", "CIC-IDS2017")
+)
+
 dataset_key = 'unsw' if model_choice == "CIC-UNSW-NB15" else 'ids17'
+
+# Dynamic Descriptions
+st.sidebar.markdown("---")
+st.sidebar.markdown("### 📖 Dataset Info")
+
+if dataset_key == 'unsw':
+    st.sidebar.info(
+        """
+        **CIC-UNSW-NB15 (Modern Threats)**
+
+        *Traffic Profile:* Captured in 2015, this dataset contains modern, complex attack vectors with a highly imbalanced class distribution. 
+
+        *Detectable Attacks:* Fuzzers, Analysis, Backdoors, DoS, Exploits, Generic, Reconnaissance, Shellcode, and Worms.
+        """
+    )
+else:
+    st.sidebar.info(
+        """
+        **CIC-IDS2017 (Classic Threats)**
+
+        *Traffic Profile:* Captured in 2017, this dataset represents a more traditional enterprise network with a massive volume of benign background traffic.
+
+        *Detectable Attacks:* DDoS, PortScan, Brute Force (FTP/SSH), Web Attacks (SQLi, XSS), Botnet, and Infiltration.
+        """
+    )
 
 
 @st.cache_resource
@@ -91,12 +136,49 @@ try:
 except Exception as e:
     st.sidebar.error(f"❌ Error loading model: {e}")
 
-# --- MAIN UI ---
-st.markdown("<h1 class='title-text'>🛡️ SENTINEL IDS: HIERARCHICAL DETECTION</h1>", unsafe_allow_html=True)
-st.markdown("Advanced network traffic analysis powered by two-stage machine learning.")
-st.markdown("---")
+# --- HERO SECTION ---
+col1, col2 = st.columns([1.5, 1])
 
-# Input Method
+with col1:
+    st.markdown("""
+        <p style="color: #4F8EF7; font-weight: 600; letter-spacing: 2px; font-size: 0.9rem; margin-bottom: 10px;">
+            NEXT-GEN CYBER DEFENSE
+        </p>
+        <h1 class="hero-title">Sentinel IDS.<br><span>Hierarchical Detection.</span></h1>
+        <p class="hero-subtitle">
+            A two-stage machine learning pipeline that filters benign traffic with surgical precision, 
+            and identifies malicious attack vectors in real-time using CICFlowMeter data.
+        </p>
+    """, unsafe_allow_html=True)
+
+with col2:
+    # We dynamically update the card based on the selected model
+    if dataset_key == 'unsw':
+        model_name = "CIC-UNSW-NB15"
+        attacks = "Fuzzers, Analysis, Backdoors, DoS, Exploits"
+    else:
+        model_name = "CIC-IDS2017"
+        attacks = "DDoS, PortScan, Brute Force, Web Attacks, Botnet"
+
+    st.markdown(f"""
+        <div class="tech-card">
+            <div class="status-badge">● SYSTEM ONLINE</div>
+            <h4>Active Model: {model_name}</h4>
+            <p><strong>Stage 1:</strong> Binary Triage (RF)</p>
+            <p><strong>Stage 2:</strong> Multi-Class Detective (LGBM)</p>
+            <hr style="border-color: rgba(255,255,255,0.1); margin: 15px 0;">
+            <p><strong>Detectable Threats:</strong><br>{attacks}</p>
+            <p style="font-size: 0.8rem; font-style: italic; margin-top: 15px;">
+                <span class="highlight">Note:</span> Ensure your CSV matches the {model_name} feature schema.
+            </p>
+        </div>
+    """, unsafe_allow_html=True)
+
+st.markdown("<br>", unsafe_allow_html=True)
+
+# --- INPUT SECTION ---
+# (Your existing input method radio button and file uploader go here)
+st.markdown("### Initiate Scan")
 input_method = st.radio("Input Method:", ["Upload File", "Local File Path"], horizontal=True)
 data_source = None
 
