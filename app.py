@@ -168,9 +168,6 @@ with col2:
             <p><strong>Stage 2:</strong> Multi-Class Detective (LGBM)</p>
             <hr style="border-color: rgba(255,255,255,0.1); margin: 15px 0;">
             <p><strong>Detectable Threats:</strong><br>{attacks}</p>
-            <p style="font-size: 0.8rem; font-style: italic; margin-top: 15px;">
-                <span class="highlight">Note:</span> Ensure your CSV matches the {model_name} feature schema.
-            </p>
         </div>
     """, unsafe_allow_html=True)
 
@@ -183,7 +180,7 @@ input_method = st.radio("Input Method:", ["Upload File", "Local File Path"], hor
 data_source = None
 
 if input_method == "Upload File":
-    uploaded_file = st.file_uploader("Upload CICFlowMeter CSV", type=["csv"])
+    uploaded_file = st.file_uploader(f"Upload CICFlowMeter CSV. Should match {model_name} feature schema", type=["csv"])
     if uploaded_file is not None:
         data_source = uploaded_file
 else:
