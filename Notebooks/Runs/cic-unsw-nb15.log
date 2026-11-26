@@ -1,0 +1,64 @@
+Time
+#
+Log Message	
+91.8s	15	==================================================
+91.8s	16	STAGE 1: FEATURE SELECTION & RETRAINING
+91.8s	17	==================================================
+114.4s	18	Top 5 Features: ['Bwd Packets/s', 'Down/Up Ratio', 'Fwd Seg Size Min', 'Bwd Init Win Bytes', 'FWD Init Win Bytes']
+181.0s	19	
+181.0s	20	--- Stage 1 with Feature Selection ---
+181.0s	21	              precision    recall  f1-score   support
+181.0s	22	
+181.0s	23	      BENIGN       1.00      0.98      0.99     80000
+181.0s	24	      ATTACK       0.92      0.98      0.95     17917
+181.0s	25	
+181.0s	26	    accuracy                           0.98     97917
+181.0s	27	   macro avg       0.96      0.98      0.97     97917
+181.0s	28	weighted avg       0.98      0.98      0.98     97917
+181.0s	29	
+181.0s	30	False Positives (False Alarms): 1501
+181.0s	31	False Negatives (Missed Attacks): 288
+182.3s	32	
+182.3s	33	==================================================
+182.3s	34	STAGE 2: TRAINING MULTI-CLASS DETECTIVE MODEL
+182.3s	35	==================================================
+182.3s	36	Applying SMOTE to balance attack classes...
+186.7s	37	Fitting the Stage 2 LightGBM model...
+248.1s	38	
+248.1s	39	--- Stage 2 Standalone Report (Attacks Only) ---
+248.1s	40	                precision    recall  f1-score   support
+248.1s	41	
+248.1s	42	      BACKDOOR       0.67      0.62      0.65        90
+248.1s	43	        BENIGN       0.00      0.00      0.00         0
+248.1s	44	           DOS       0.73      0.26      0.38       894
+248.1s	45	      EXPLOITS       0.80      0.77      0.79      6190
+248.1s	46	       FUZZERS       0.69      0.91      0.79      5923
+248.1s	47	       GENERIC       0.79      0.69      0.74       927
+248.1s	48	RECONNAISSANCE       0.91      0.64      0.75      3347
+248.1s	49	     SHELLCODE       0.38      0.39      0.38       420
+248.1s	50	         WORMS       0.50      0.53      0.51        49
+248.1s	51	
+248.1s	52	     micro avg       0.76      0.75      0.75     17840
+248.1s	53	     macro avg       0.61      0.54      0.55     17840
+248.1s	54	  weighted avg       0.77      0.75      0.75     17840
+248.1s	55	
+248.3s	56	
+248.3s	57	==================================================
+248.3s	58	COMBINED CHAINED PIPELINE EVALUATION
+248.3s	59	==================================================
+255.8s	60	                precision    recall  f1-score   support
+255.8s	61	
+255.8s	62	      ANALYSIS       0.36      0.66      0.46        77
+255.8s	63	      BACKDOOR       0.66      0.62      0.64        90
+255.8s	64	        BENIGN       1.00      0.98      0.99     80000
+255.8s	65	           DOS       0.73      0.26      0.38       894
+255.8s	66	      EXPLOITS       0.78      0.77      0.78      6190
+255.8s	67	       FUZZERS       0.59      0.90      0.71      5923
+255.8s	68	       GENERIC       0.78      0.69      0.73       927
+255.8s	69	RECONNAISSANCE       0.90      0.64      0.75      3347
+255.8s	70	     SHELLCODE       0.34      0.38      0.36       420
+255.8s	71	         WORMS       0.48      0.53      0.50        49
+255.8s	72	
+255.8s	73	      accuracy                           0.94     97917
+255.8s	74	     macro avg       0.66      0.64      0.63     97917
+255.8s	75	  weighted avg       0.95      0.94      0.94     97917
