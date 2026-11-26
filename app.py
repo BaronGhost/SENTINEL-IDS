@@ -141,7 +141,7 @@ col1, col2 = st.columns([1.5, 1])
 
 with col1:
     st.markdown("""
-        <p style="color: #FFFFFF; font-weight: 600; letter-spacing: 2px; font-size: 0.9rem; margin-bottom: 10px;">
+        <p style="color: #56aeff; font-weight: 600; letter-spacing: 2px; font-size: 0.9rem; margin-bottom: 10px;">
             NEXT-GEN CYBER DEFENSE
         </p>
         <h1 style="margin: 0; font-family: verdana; font-weight: 700; font-size: clamp(36px, 5vw, 48px); line-height: 1.05; letter-spacing: -0.02em">Sentinel IDS. <br> <span style="color: #56aeff">Hierarchical</span> Detection.</h1>
