@@ -92,7 +92,7 @@ except Exception as e:
     st.sidebar.error(f"❌ Error loading model: {e}")
 
 # --- MAIN UI ---
-st.markdown("<h1 class='title-text'>🛡️ SENTINEL IDS: HIERARCHICAL IDS</h1>", unsafe_allow_html=True)
+st.markdown("<h1 class='title-text'>🛡️ SENTINEL IDS: HIERARCHICAL DETECTION</h1>", unsafe_allow_html=True)
 st.markdown("Advanced network traffic analysis powered by two-stage machine learning.")
 st.markdown("---")
 
