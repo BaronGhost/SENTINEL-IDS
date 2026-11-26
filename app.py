@@ -21,7 +21,7 @@ st.markdown("""
 
     /* Tech Grid Background */
     [data-testid="stAppViewContainer"] {
-        background-color: #05294e;
+        background-color: #060644;
         background-image:
             linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
             linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
@@ -144,7 +144,7 @@ with col1:
         <p style="color: #FFFFFF; font-weight: 600; letter-spacing: 2px; font-size: 0.9rem; margin-bottom: 10px;">
             NEXT-GEN CYBER DEFENSE
         </p>
-        <h1 style="margin: 0; font-family: verdana; font-weight: 700; font-size: clamp(42px, 5vw, 56px); line-height: 1.05; letter-spacing: -0.02em">Sentinel IDS. <br> <span style="color: #56aeff">Hierarchical</span> Detection.</h1>
+        <h1 style="margin: 0; font-family: verdana; font-weight: 700; font-size: clamp(36px, 5vw, 48px); line-height: 1.05; letter-spacing: -0.02em">Sentinel IDS. <br> <span style="color: #56aeff">Hierarchical</span> Detection.</h1>
         <p class="hero-subtitle">
             A two-stage machine learning pipeline that filters benign traffic with surgical precision, 
             and identifies malicious attack vectors in real-time using CICFlowMeter data.
