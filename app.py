@@ -21,7 +21,7 @@ st.markdown("""
 
     /* Tech Grid Background */
     [data-testid="stAppViewContainer"] {
-        background-color: #060644;
+        background-color: #050533;
         background-image:
             linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
             linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
@@ -108,7 +108,7 @@ if dataset_key == 'unsw':
         """
         **CIC-UNSW-NB15 (Modern Threats)**
 
-        *Traffic Profile:* Captured in 2015, this dataset contains modern, complex attack vectors with a highly imbalanced class distribution. 
+        *Traffic Profile:* Captured in 2024, this dataset contains modern, complex attack vectors with a highly imbalanced class distribution. 
 
         *Detectable Attacks:* Fuzzers, Analysis, Backdoors, DoS, Exploits, Generic, Reconnaissance, Shellcode, and Worms.
         """
