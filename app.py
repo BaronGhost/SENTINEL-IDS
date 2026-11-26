@@ -238,23 +238,35 @@ if 'results' in st.session_state:
 
     # --- 3. DATA PREVIEW & DOWNLOAD ---
     st.markdown("### 📄 Detailed Results")
-    st.dataframe(results[['Verdict', 'Attack_Probability']].head(100), use_container_width=True)
 
-    # TWO-STEP DOWNLOAD TO PREVENT UI FREEZE
-    st.markdown("#### Export Data")
-    st.markdown("Generating the full CSV may take a moment depending on file size.")
+    # Only show rows with attacks in the preview (or show top 100 if no attacks)
+    if attack_count > 0:
+        attack_results = results[results['Verdict'] != 'BENIGN']
+        st.dataframe(attack_results[['Verdict', 'Attack_Probability']].head(100), use_container_width=True)
+    else:
+        st.dataframe(results[['Verdict', 'Attack_Probability']].head(100), use_container_width=True)
 
-    if st.button("Prepare Full CSV for Download"):
-        with st.spinner("Compiling 1.8GB CSV... (Please wait)"):
-            # Convert to CSV once and store in session state
-            st.session_state['csv_data'] = results.to_csv(index=False).encode('utf-8')
-            st.success("CSV Ready!")
+    # TWO-STEP DOWNLOAD (FILTERED FOR MEMORY SAFETY)
+    st.markdown("#### Export Threat Report")
+    st.markdown(
+        "To prevent server crashes, we only export the **malicious flows (Alerts)**. Benign traffic is omitted.")
+
+    if st.button("Prepare Threat Report (CSV)"):
+        with st.spinner("Compiling threat report..."):
+            if attack_count > 0:
+                export_df = results[results['Verdict'] != 'BENIGN']
+            else:
+                export_df = results  # If no attacks, just export the small batch
+
+            # Convert to CSV in memory (now much smaller)
+            st.session_state['csv_data'] = export_df.to_csv(index=False).encode('utf-8')
+            st.success(f"Threat Report Ready! ({len(export_df):,} flows)")
 
     if 'csv_data' in st.session_state:
         st.download_button(
-            label="📥 CLICK HERE TO DOWNLOAD",
+            label="📥 DOWNLOAD THREAT REPORT",
             data=st.session_state['csv_data'],
-            file_name='sentinel_ai_results.csv',
+            file_name='sentinel_ids_alerts.csv',
             mime='text/csv',
             type="primary"
         )
@@ -262,8 +274,6 @@ if 'results' in st.session_state:
     # --- 4. RESET BUTTON ---
     st.markdown("---")
     if st.button("🔄 Scan Another File", type="secondary", use_container_width=True):
-        # Clear the stored results and CSV data from memory
         st.session_state.pop('results', None)
         st.session_state.pop('csv_data', None)
-        # Rerun the app to reset the UI back to the uploader
         st.rerun()
