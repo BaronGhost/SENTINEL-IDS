@@ -48,7 +48,7 @@ The application includes pre-trained models for two industry-standard datasets:
 2. **Run the Application**
    ```bash
    python3 -m venv venv
-   source venv/bin/activate
+   .venv/Scripts/Activate.ps1
   
    pip install -r requirements.txt
    streamlit run app.py 
